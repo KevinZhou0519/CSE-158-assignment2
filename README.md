@@ -14,6 +14,8 @@
 
 ---
 
+## * Rerunning the file may take around 6 hours
+
 ## 2. Evaluation Metrics
 
 | Metric | Why Use It |
