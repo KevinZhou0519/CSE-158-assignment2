@@ -38,6 +38,7 @@
 | **3. TF-IDF + Synopsis/Summary + Logistic Regression** | Add movie plot text (synopsis or summary as fallback) |
 | **4. TF-IDF + Synopsis/Summary + Cosine Similarity + User Features + Movie Features + Logistic Regression** | Add review-plot similarity, user spoiler history, and movie spoiler rate |
 | **5. LSTM + TF-IDF + Synopsis/Summary + Cosine Similarity + User Features + Movie Features** | Deep learning model combining sequential text understanding with all engineered features |
+| **6. S-Bert + Cosine Similarity + Logistic Regression** | Highly complicated neural network that captures the semantic relationship between the review and the plot synopsis by calculating the cosine similarity of their S-Bert embeddings |
 
 **Progression Logic:**
 1. **Baseline:** Start with simple text features (BOW)
