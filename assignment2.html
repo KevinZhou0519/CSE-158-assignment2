@@ -8792,6 +8792,7 @@ Percentiles (Distribution Breakdown):
     <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="c1"># Customize the layout for better readability</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Number of Reviews for a Single Movie"</span><span class="p">,</span>
     <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"Number of Movies (Frequency)"</span><span class="p">,</span>
@@ -8799,6 +8800,7 @@ Percentiles (Distribution Breakdown):
     <span class="n">template</span><span class="o">=</span><span class="s2">"plotly_white"</span>
 <span class="p">)</span>
 
+<span class="c1"># Display the figure</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -9564,7 +9566,6 @@ Generating Plot 2: Review Count Comparison by Spoiler Category...
 
 <span class="c1"># Statistical Test: Is genre a significant predictor?</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Statistical Significance ---"</span><span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
 <span class="n">genre_groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'primary_genre'</span><span class="p">)</span> 
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">]</span>
@@ -9626,32 +9627,6 @@ Generating Plot 2: Review Count Comparison by Spoiler Category...
     <span class="n">genre_display</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'genre_str'</span><span class="p">][:</span><span class="mi">25</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'...'</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'genre_str'</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">25</span> <span class="k">else</span> <span class="n">row</span><span class="p">[</span><span class="s1">'genre_str'</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'movie_rating'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'release_year'</span><span class="p">])</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> "</span>
           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'review_count'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'spoiler_rate'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;9.2%</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">genre_display</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="c1"># ----------------------------------------</span>
-<span class="c1"># 5. KEY INSIGHTS</span>
-<span class="c1"># ----------------------------------------</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"KEY INSIGHTS - MOVIE ANALYSIS"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">1. Movie Rating Effect:</span>
-<span class="s2">   - Correlation: </span><span class="si">{</span><span class="n">correlation</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span>
-<span class="s2">   - </span><span class="si">{</span><span class="s1">'Minimal effect'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">correlation</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Some effect'</span><span class="si">}</span><span class="s2"> on spoiler rate</span>
-
-<span class="s2">2. Release Year Effect:</span>
-<span class="s2">   - Correlation: </span><span class="si">{</span><span class="n">correlation_year</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span>
-<span class="s2">   - </span><span class="si">{</span><span class="s1">'Older movies'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">correlation_year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Newer movies'</span><span class="si">}</span><span class="s2"> tend to have </span><span class="si">{</span><span class="s1">'higher'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">correlation_year</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'higher'</span><span class="si">}</span><span class="s2"> spoiler rates</span>
-
-<span class="s2">3. Time Since Release:</span>
-<span class="s2">   - Reviews written long after release may have different spoiler patterns</span>
-<span class="s2">   - Early reviews (&lt; 1 week): </span><span class="si">{</span><span class="n">time_analysis</span><span class="p">[</span><span class="n">time_analysis</span><span class="p">[</span><span class="s1">'time_after_release'</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'0-7 days'</span><span class="p">][</span><span class="s1">'spoiler_rate'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span>
-<span class="s2">   - Late reviews (10+ years): </span><span class="si">{</span><span class="n">time_analysis</span><span class="p">[</span><span class="n">time_analysis</span><span class="p">[</span><span class="s1">'time_after_release'</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'10+ yr'</span><span class="p">][</span><span class="s1">'spoiler_rate'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span>
-
-<span class="s2">4. Feature Engineering:</span>
-<span class="s2">   - movie_rating can be a feature (weak predictor)</span>
-<span class="s2">   - days_after_release is potentially useful</span>
-<span class="s2">   - movie_spoiler_rate (historical) is strong predictor</span>
-<span class="s2">"""</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -11903,7 +11878,11 @@ Top 20 by review count:
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")</span>
 <span class="c1"># print(f"Using device: {device}")</span>
 
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">"cuda"</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"cpu"</span><span class="p">)</span>
+<span class="c1"># device = torch.device("cuda" if torch.cuda.is_available() else "cpu")</span>
+<span class="c1"># print(f"Using device: {device}")</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">'mps'</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> 
+                      <span class="s1">'cuda'</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">'cpu'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -11981,14 +11960,17 @@ Top 20 by review count:
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># --- Extract text and labels from split dataframes ---</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Data Preparation</span>
+<span class="c1"># Getting review_text(the feature) and is_spoiler(the label)</span>
 <span class="n">X_train_text</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span>
 <span class="n">X_val_text</span> <span class="o">=</span> <span class="n">val_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span>
 
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span>
 <span class="n">y_val</span> <span class="o">=</span> <span class="n">val_df</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span>
 
-<span class="c1"># --- Vectorize (fit on train only) ---</span>
+<span class="c1"># Vectorize</span>
+<span class="c1"># Find the 50000 most frequent words and ignore junk words</span>
+<span class="c1"># For every text in train and val, count the number of times each word appears in review_text</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Vectorizing..."</span><span class="p">)</span>
 <span class="n">bow_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
 
@@ -12001,12 +11983,13 @@ Top 20 by review count:
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"BOW Train Shape: </span><span class="si">{</span><span class="n">X_train_bow</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"BOW Val Shape:   </span><span class="si">{</span><span class="n">X_val_bow</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># --- Train Model (verbose=1 shows progress) ---</span>
+<span class="c1"># Training</span>
+<span class="c1"># Use Logistic Regression to train the model</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Training Logistic Regression..."</span><span class="p">)</span>
 <span class="n">bow_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">bow_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_bow</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># --- Evaluate on Validation Set ---</span>
+<span class="c1"># Prediction and Evaluation</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Evaluating..."</span><span class="p">)</span>
 <span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">bow_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_bow</span><span class="p">)</span>
 
@@ -12015,12 +11998,12 @@ Top 20 by review count:
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report (Validation):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">))</span>
 
-<span class="c1"># --- Save for later ---</span>
-<span class="n">bow_results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'model'</span><span class="p">:</span> <span class="n">bow_model</span><span class="p">,</span>
-    <span class="s1">'vectorizer'</span><span class="p">:</span> <span class="n">bow_vectorizer</span><span class="p">,</span>
-    <span class="s1">'val_accuracy'</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="c1"># Save the model for testing and final evaluation</span>
+<span class="c1"># bow_results = {</span>
+<span class="c1">#     'model': bow_model,</span>
+<span class="c1">#     'vectorizer': bow_vectorizer,</span>
+<span class="c1">#     'val_accuracy': accuracy_score(y_val, y_val_pred)</span>
+<span class="c1"># }</span>
 </pre></div>
 </div>
 </div>
@@ -12110,18 +12093,18 @@ weighted avg       0.75      0.77      0.75     28696
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#TF-IDF for review text + synopsis to do classification</span>
 
 
-<span class="c1"># --- Create synopsis lookup ---</span>
+<span class="c1"># Map the synopses to the reviews.</span>
+<span class="c1"># If a user reviews Movie_ID_123, we grab the synopsis for Movie_ID_123.</span>
 <span class="n">synopsis_dict</span> <span class="o">=</span> <span class="n">details_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'movie_id'</span><span class="p">)[</span><span class="s1">'plot_synopsis'</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-
-<span class="c1"># --- Get synopsis for each split ---</span>
 <span class="n">train_synopsis</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">synopsis_dict</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 <span class="n">val_synopsis</span> <span class="o">=</span> <span class="n">val_df</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">synopsis_dict</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
 
-<span class="c1"># --- Two separate vectorizers ---</span>
+<span class="c1"># Two separate vectorizers for review text and synopsis</span>
 <span class="n">tfidf_review</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
 <span class="n">tfidf_synopsis</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
 
-<span class="c1"># --- Vectorize with progress bar ---</span>
+<span class="c1"># Vectorize</span>
+<span class="c1"># Learns the vocabulary of the REVIEWS and SYNOPSIS</span>
 <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"TF-IDF Vectorization"</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
     <span class="n">X_train_review_tfidf</span> <span class="o">=</span> <span class="n">tfidf_review</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">])</span>
     <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -12132,7 +12115,7 @@ weighted avg       0.75      0.77      0.75     28696
     <span class="n">X_val_synopsis_tfidf</span> <span class="o">=</span> <span class="n">tfidf_synopsis</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_synopsis</span><span class="p">)</span>
     <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># --- Combine: Review + Synopsis ---</span>
+<span class="c1"># Combine Review and Synopsis using hstack(by glues the matrices together)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Combining features..."</span><span class="p">)</span>
 <span class="n">X_train_combined</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span><span class="n">X_train_review_tfidf</span><span class="p">,</span> <span class="n">X_train_synopsis_tfidf</span><span class="p">])</span>
 <span class="n">X_val_combined</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span><span class="n">X_val_review_tfidf</span><span class="p">,</span> <span class="n">X_val_synopsis_tfidf</span><span class="p">])</span>
@@ -12140,12 +12123,12 @@ weighted avg       0.75      0.77      0.75     28696
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Combined Train Shape: </span><span class="si">{</span><span class="n">X_train_combined</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Combined Val Shape:   </span><span class="si">{</span><span class="n">X_val_combined</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># --- Train Model ---</span>
+<span class="c1"># Train Logistic Regression Model</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Training Logistic Regression..."</span><span class="p">)</span>
 <span class="n">tfidf_synopsis_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">tfidf_synopsis_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_combined</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># --- Evaluate ---</span>
+<span class="c1"># Prediction and Evaluation</span>
 <span class="n">y_val_pred</span> <span class="o">=</span> <span class="n">tfidf_synopsis_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_combined</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- TF-IDF (Review + Synopsis) Validation Results ---"</span><span class="p">)</span>
@@ -12153,7 +12136,7 @@ weighted avg       0.75      0.77      0.75     28696
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report (Validation):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred</span><span class="p">))</span>
 
-<span class="c1"># --- Save ---</span>
+<span class="c1"># Save the model for testing and final evaluation</span>
 <span class="n">tfidf_synopsis_results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'model'</span><span class="p">:</span> <span class="n">tfidf_synopsis_model</span><span class="p">,</span>
     <span class="s1">'vectorizer_review'</span><span class="p">:</span> <span class="n">tfidf_review</span><span class="p">,</span>
@@ -12215,25 +12198,25 @@ weighted avg       0.77      0.78      0.76     28696
 <span class="c1"># (TF-IDF (REVIEW + SYNOPSIS) + Cosine Similarity CLASSIFICATION)</span>
 
 
-<span class="c1"># --- Compute Cosine Similarity between Review and Synopsis ---</span>
-<span class="c1"># Need SHARED vocabulary for meaningful comparison</span>
+<span class="c1"># Compute Cosine Similarity between Review and Synopsis</span>
+<span class="c1"># To compare two texts, they must be in the SAME vector space.</span>
+<span class="c1"># Cannot compare Review Vector (vocab A) with Synopsis Vector (vocab B).</span>
+<span class="c1"># We build a generic vocabulary (top 10k words) from BOTH datasets.</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Building shared TF-IDF for similarity..."</span><span class="p">)</span>
 <span class="n">tfidf_shared</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s1">'english'</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
-<span class="c1"># Fit on combined train text (reviews + synopses)</span>
+<span class="c1"># Combine all text to learn the full universe of words.</span>
 <span class="n">all_train_text</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">],</span> <span class="n">train_synopsis</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">all_train_text</span><span class="p">)</span>
 
-<span class="c1"># Transform reviews and synopses with SHARED vocabulary</span>
+<span class="c1"># Transform both into the exact same column structure.</span>
 <span class="n">train_review_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">])</span>
 <span class="n">train_synopsis_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_synopsis</span><span class="p">)</span>
-
 <span class="n">val_review_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">])</span>
 <span class="n">val_synopsis_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_synopsis</span><span class="p">)</span>
 
-<span class="c1"># --- Compute row-wise cosine similarity ---</span>
+<span class="c1"># Compute row-wise cosine similarity</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Computing cosine similarities..."</span><span class="p">)</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">row_cosine_similarity</span><span class="p">(</span><span class="n">matrix1</span><span class="p">,</span> <span class="n">matrix2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Compute cosine similarity for each row pair"""</span>
     <span class="n">similarities</span> <span class="o">=</span> <span class="p">[]</span>
@@ -12244,24 +12227,23 @@ weighted avg       0.77      0.78      0.76     28696
 
 <span class="n">train_cosine_sim</span> <span class="o">=</span> <span class="n">row_cosine_similarity</span><span class="p">(</span><span class="n">train_review_shared</span><span class="p">,</span> <span class="n">train_synopsis_shared</span><span class="p">)</span>
 <span class="n">val_cosine_sim</span> <span class="o">=</span> <span class="n">row_cosine_similarity</span><span class="p">(</span><span class="n">val_review_shared</span><span class="p">,</span> <span class="n">val_synopsis_shared</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Train cosine sim mean: </span><span class="si">{</span><span class="n">train_cosine_sim</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Val cosine sim mean:   </span><span class="si">{</span><span class="n">val_cosine_sim</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># --- Combine: Review TF-IDF + Synopsis TF-IDF + Cosine Similarity ---</span>
+
+<span class="c1"># Combine: Review TF-IDF + Synopsis TF-IDF + Cosine Similarity by using hstack again</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Combining all features..."</span><span class="p">)</span>
 <span class="n">X_train_with_sim</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span><span class="n">X_train_review_tfidf</span><span class="p">,</span> <span class="n">X_train_synopsis_tfidf</span><span class="p">,</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_cosine_sim</span><span class="p">)])</span>
 <span class="n">X_val_with_sim</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span><span class="n">X_val_review_tfidf</span><span class="p">,</span> <span class="n">X_val_synopsis_tfidf</span><span class="p">,</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">val_cosine_sim</span><span class="p">)])</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Train Shape (with similarity): </span><span class="si">{</span><span class="n">X_train_with_sim</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Val Shape (with similarity):   </span><span class="si">{</span><span class="n">X_val_with_sim</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># --- Train Model ---</span>
+<span class="c1"># Train Logistic Regression Model</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Training Logistic Regression..."</span><span class="p">)</span>
 <span class="n">tfidf_cosine_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">tfidf_cosine_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_with_sim</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># --- Evaluate ---</span>
+<span class="c1"># Prediction and Evaluation</span>
 <span class="n">y_val_pred_cosine</span> <span class="o">=</span> <span class="n">tfidf_cosine_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_with_sim</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- TF-IDF (Review + Synopsis) + Cosine Similarity Validation Results ---"</span><span class="p">)</span>
@@ -12331,25 +12313,16 @@ weighted avg       0.77      0.78      0.76     28696
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># ============================================================</span>
-<span class="c1"># METHOD 5: TF-IDF + COSINE + USER FEATURES + MOVIE FEATURES</span>
-<span class="c1"># ============================================================</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"METHOD 5: TF-IDF + COSINE + USER + MOVIE FEATURES"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># TF-IDF (REVIEW + SYNOPSIS) + COSINE + USER FEATURES + MOVIE FEATURES + Logistic Regression</span>
 
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 1: Get User Features</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Get User Features from user_df</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Preparing user features..."</span><span class="p">)</span>
-
-<span class="c1"># Create user feature lookup from user_df (assuming you created this earlier)</span>
 <span class="n">user_features_dict</span> <span class="o">=</span> <span class="n">user_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'user_id'</span><span class="p">)[</span>
     <span class="p">[</span><span class="s1">'user_smoothed_spoiler_rate'</span><span class="p">,</span> <span class="s1">'user_confidence'</span><span class="p">]</span>
 <span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">'index'</span><span class="p">)</span>
 
+<span class="c1"># If a user is new (not in the training set), we fill with the global average.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_user_features</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
     <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'user_smoothed_spoiler_rate'</span><span class="p">:</span> <span class="n">global_spoiler_rate</span><span class="p">,</span> <span class="s1">'user_confidence'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">user_features_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
@@ -12360,25 +12333,20 @@ weighted avg       0.77      0.78      0.76     28696
      <span class="n">get_user_features</span><span class="p">(</span><span class="n">uid</span><span class="p">)[</span><span class="s1">'user_confidence'</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'user_id'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Train User Features"</span><span class="p">)</span>
 <span class="p">])</span>
-
 <span class="n">val_user_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">[</span><span class="n">get_user_features</span><span class="p">(</span><span class="n">uid</span><span class="p">)[</span><span class="s1">'user_smoothed_spoiler_rate'</span><span class="p">],</span> 
      <span class="n">get_user_features</span><span class="p">(</span><span class="n">uid</span><span class="p">)[</span><span class="s1">'user_confidence'</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">val_df</span><span class="p">[</span><span class="s1">'user_id'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Val User Features"</span><span class="p">)</span>
 <span class="p">])</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Train user features shape: </span><span class="si">{</span><span class="n">train_user_features</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 2: Get Movie Features  </span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Get Movie Features from details_df</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Preparing movie features..."</span><span class="p">)</span>
-
-<span class="c1"># Create movie feature lookup from details_df</span>
 <span class="n">movie_features_dict</span> <span class="o">=</span> <span class="n">details_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'movie_id'</span><span class="p">)[</span>
     <span class="p">[</span><span class="s1">'num_reviews'</span><span class="p">,</span> <span class="s1">'spoiler_percent'</span><span class="p">]</span>
 <span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">'index'</span><span class="p">)</span>
 
+<span class="c1"># If a movie is new (not in the training set), we fill with the global average.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_movie_features</span><span class="p">(</span><span class="n">movie_id</span><span class="p">):</span>
     <span class="n">default</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'num_reviews'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'spoiler_percent'</span><span class="p">:</span> <span class="n">global_spoiler_rate</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">movie_features_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">movie_id</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
@@ -12389,7 +12357,6 @@ weighted avg       0.77      0.78      0.76     28696
      <span class="n">get_movie_features</span><span class="p">(</span><span class="n">mid</span><span class="p">)[</span><span class="s1">'spoiler_percent'</span><span class="p">]]</span>
     <span class="k">for</span> <span class="n">mid</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Train Movie Features"</span><span class="p">)</span>
 <span class="p">])</span>
-
 <span class="n">val_movie_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">[</span><span class="n">get_movie_features</span><span class="p">(</span><span class="n">mid</span><span class="p">)[</span><span class="s1">'num_reviews'</span><span class="p">],</span> 
      <span class="n">get_movie_features</span><span class="p">(</span><span class="n">mid</span><span class="p">)[</span><span class="s1">'spoiler_percent'</span><span class="p">]]</span>
@@ -12398,10 +12365,10 @@ weighted avg       0.77      0.78      0.76     28696
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Train movie features shape: </span><span class="si">{</span><span class="n">train_movie_features</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 3: Normalize numerical features</span>
-<span class="c1"># ============================================================</span>
 
+<span class="c1"># Feature Scaling</span>
+<span class="c1"># Make sure the features are on the same scale so that one feature</span>
+<span class="c1"># doesn't dominate the others.</span>
 <span class="n">scaler_user</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">train_user_features_scaled</span> <span class="o">=</span> <span class="n">scaler_user</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_user_features</span><span class="p">)</span>
 <span class="n">val_user_features_scaled</span> <span class="o">=</span> <span class="n">scaler_user</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_user_features</span><span class="p">)</span>
@@ -12410,25 +12377,17 @@ weighted avg       0.77      0.78      0.76     28696
 <span class="n">train_movie_features_scaled</span> <span class="o">=</span> <span class="n">scaler_movie</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_movie_features</span><span class="p">)</span>
 <span class="n">val_movie_features_scaled</span> <span class="o">=</span> <span class="n">scaler_movie</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">val_movie_features</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 4: Combine ALL Features</span>
-<span class="c1"># ============================================================</span>
+
+<span class="c1"># Combine ALL Features using hstack</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Combining all features..."</span><span class="p">)</span>
 
-<span class="c1"># X_train_review_tfidf: (N, 50000) - from Method 3</span>
-<span class="c1"># X_train_synopsis_tfidf: (N, 50000) - from Method 3</span>
-<span class="c1"># train_cosine_sim: (N, 1) - from Method 4</span>
-<span class="c1"># train_user_features_scaled: (N, 2)</span>
-<span class="c1"># train_movie_features_scaled: (N, 2)</span>
-
 <span class="n">X_train_full</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span>
-    <span class="n">X_train_review_tfidf</span><span class="p">,</span>                    <span class="c1"># 50,000 features</span>
-    <span class="n">X_train_synopsis_tfidf</span><span class="p">,</span>                  <span class="c1"># 50,000 features</span>
-    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_cosine_sim</span><span class="p">),</span>            <span class="c1"># 1 feature</span>
-    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_user_features_scaled</span><span class="p">),</span>  <span class="c1"># 2 features</span>
-    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_movie_features_scaled</span><span class="p">)</span>  <span class="c1"># 2 features</span>
+    <span class="n">X_train_review_tfidf</span><span class="p">,</span>                    
+    <span class="n">X_train_synopsis_tfidf</span><span class="p">,</span>                 
+    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_cosine_sim</span><span class="p">),</span>           
+    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_user_features_scaled</span><span class="p">),</span>  
+    <span class="n">csr_matrix</span><span class="p">(</span><span class="n">train_movie_features_scaled</span><span class="p">)</span> 
 <span class="p">])</span>
-
 <span class="n">X_val_full</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span>
     <span class="n">X_val_review_tfidf</span><span class="p">,</span>
     <span class="n">X_val_synopsis_tfidf</span><span class="p">,</span>
@@ -12437,19 +12396,15 @@ weighted avg       0.77      0.78      0.76     28696
     <span class="n">csr_matrix</span><span class="p">(</span><span class="n">val_movie_features_scaled</span><span class="p">)</span>
 <span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Full Train Shape: </span><span class="si">{</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Expected: (N, 100,005)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Full Train Shape: </span><span class="si">{</span><span class="n">X_train_full</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Full Val Shape:   </span><span class="si">{</span><span class="n">X_val_full</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 5: Train Model</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Train Logistic Regression Model</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Training Logistic Regression..."</span><span class="p">)</span>
 <span class="n">full_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">full_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_full</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 6: Evaluate</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Prediction and Evaluation</span>
 <span class="n">y_val_pred_full</span> <span class="o">=</span> <span class="n">full_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_full</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- FULL MODEL (TF-IDF + Cosine + User + Movie) Validation Results ---"</span><span class="p">)</span>
@@ -12457,9 +12412,7 @@ weighted avg       0.77      0.78      0.76     28696
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report (Validation):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_val_pred_full</span><span class="p">))</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 7: Save</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Save the model for testing and final evaluation</span>
 <span class="n">full_model_results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'model'</span><span class="p">:</span> <span class="n">full_model</span><span class="p">,</span>
     <span class="s1">'vectorizer_review'</span><span class="p">:</span> <span class="n">tfidf_review</span><span class="p">,</span>
@@ -12580,20 +12533,14 @@ weighted avg       0.91      0.91      0.91     28696
 
 
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 1: Build Vocabulary for LSTM</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Build Vocabulary for LSTM and Tokenize the review text</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Building vocabulary..."</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\w+'</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-
-<span class="c1"># Build vocab from training data only</span>
 <span class="n">word_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Counting words"</span><span class="p">):</span>
     <span class="n">word_counts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-
-<span class="c1"># Keep top words</span>
 <span class="n">VOCAB_SIZE</span> <span class="o">=</span> <span class="mi">30000</span>
 <span class="n">most_common</span> <span class="o">=</span> <span class="n">word_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="n">VOCAB_SIZE</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">vocab</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'&lt;PAD&gt;'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'&lt;UNK&gt;'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
@@ -12601,12 +12548,7 @@ weighted avg       0.91      0.91      0.91     28696
     <span class="n">vocab</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Vocabulary size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 2: Text to Sequence Function</span>
-<span class="c1"># ============================================================</span>
 <span class="n">MAX_LEN</span> <span class="o">=</span> <span class="mi">300</span>
-
 <span class="k">def</span><span class="w"> </span><span class="nf">text_to_seq</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">MAX_LEN</span><span class="p">):</span>
     <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="c1"># Take LAST max_len tokens (spoilers usually at end)</span>
@@ -12621,9 +12563,11 @@ weighted avg       0.91      0.91      0.91     28696
     
     <span class="k">return</span> <span class="n">seq</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 3: Create Dataset Class</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Create Dataset Class</span>
+<span class="c1"># requires four different types of inputs for every single movie review</span>
+<span class="c1"># cannot put these into one single NumPy matrix because they have </span>
+<span class="c1"># different shapes and data types</span>
+<span class="c1"># Custom Dataset make sure data is in the correct format for the model</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HybridSpoilerDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tfidf_features</span><span class="p">,</span> <span class="n">cosine_sims</span><span class="p">,</span> <span class="n">user_features</span><span class="p">,</span> <span class="n">movie_features</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">max_len</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">texts</span> <span class="o">=</span> <span class="n">texts</span>
@@ -12659,9 +12603,8 @@ weighted avg       0.91      0.91      0.91     28696
             <span class="s1">'label'</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="p">}</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 4: Define Hybrid Model</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Define Hybrid Model</span>
+<span class="c1"># Combine LSTM, TF-IDF, Cosine, User, Movie features</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HybridLSTMModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">tfidf_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -12670,7 +12613,6 @@ weighted avg       0.91      0.91      0.91     28696
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embed_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span> 
                            <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
-        
         <span class="c1"># Attention for LSTM</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         
@@ -12691,15 +12633,13 @@ weighted avg       0.91      0.91      0.91     28696
         <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
     
     <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">movie</span><span class="p">):</span>
-        <span class="c1"># LSTM path</span>
+        <span class="c1"># Run LSTM</span>
         <span class="n">embedded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
         <span class="n">lstm_out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">embedded</span><span class="p">)</span>
-        
-        <span class="c1"># Attention</span>
         <span class="n">attn_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">lstm_out</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">context</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">attn_weights</span> <span class="o">*</span> <span class="n">lstm_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         
-        <span class="c1"># Compress TF-IDF</span>
+        <span class="c1"># Run TF-IDF Compression</span>
         <span class="n">tfidf_compressed</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tfidf_compress</span><span class="p">(</span><span class="n">tfidf</span><span class="p">))</span>
         
         <span class="c1"># Concatenate all features</span>
@@ -12711,12 +12651,11 @@ weighted avg       0.91      0.91      0.91     28696
             <span class="n">movie</span>              <span class="c1"># Movie features (2)</span>
         <span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         
+        <span class="c1">#Predict</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 5: Prepare Data</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Prepare Data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Preparing datasets..."</span><span class="p">)</span>
 
 <span class="c1"># Reduce TF-IDF dimensions for memory (use review only, not synopsis)</span>
@@ -12729,6 +12668,7 @@ weighted avg       0.91      0.91      0.91     28696
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"TF-IDF shape for LSTM: </span><span class="si">{</span><span class="n">X_train_tfidf_lstm</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Create datasets</span>
+<span class="c1"># Instantiate the Custom Dataset classes we defined earlier.</span>
 <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">HybridSpoilerDataset</span><span class="p">(</span>
     <span class="n">texts</span><span class="o">=</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
     <span class="n">labels</span><span class="o">=</span><span class="n">train_df</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
@@ -12739,7 +12679,6 @@ weighted avg       0.91      0.91      0.91     28696
     <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span>
     <span class="n">max_len</span><span class="o">=</span><span class="n">MAX_LEN</span>
 <span class="p">)</span>
-
 <span class="n">val_dataset</span> <span class="o">=</span> <span class="n">HybridSpoilerDataset</span><span class="p">(</span>
     <span class="n">texts</span><span class="o">=</span><span class="n">val_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
     <span class="n">labels</span><span class="o">=</span><span class="n">val_df</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
@@ -12755,13 +12694,7 @@ weighted avg       0.91      0.91      0.91     28696
 <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 6: Training Setup</span>
-<span class="c1"># ============================================================</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">'mps'</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> 
-                      <span class="s1">'cuda'</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">'cpu'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
+<span class="c1"># Training Setup</span>
 <span class="n">lstm_hybrid_model</span> <span class="o">=</span> <span class="n">HybridLSTMModel</span><span class="p">(</span>
     <span class="n">vocab_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),</span>
     <span class="n">embed_dim</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
@@ -12771,14 +12704,17 @@ weighted avg       0.91      0.91      0.91     28696
     <span class="n">dropout</span><span class="o">=</span><span class="mf">0.3</span>
 <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-<span class="c1"># Class weight for imbalance</span>
-<span class="n">pos_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">2.8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># ~74/26 ratio</span>
+
+<span class="c1"># HANDLING IMBALANCE:</span>
+<span class="c1"># Since spoilers are rare (e.g., only 26% of data), the model is lazy and wants to guess "Safe" always.</span>
+<span class="c1"># pos_weight=2.8 tells the Loss Function: try to put more importance on Spoilers instead of non-spoilers</span>
+<span class="n">pos_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">2.8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="c1"># Loss Function</span>
 <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">(</span><span class="n">pos_weight</span><span class="o">=</span><span class="n">pos_weight</span><span class="p">)</span>
+<span class="c1"># Optimizer</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">lstm_hybrid_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 7: Training Functions</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Training Functions</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
     <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
@@ -12791,18 +12727,18 @@ weighted avg       0.91      0.91      0.91     28696
         <span class="n">movie</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'movie'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         
+        <span class="c1"># Clear old gradients, compute new gradients, and update weights</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
         <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">movie</span><span class="p">)</span>
         <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
         <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        
         <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">max_norm</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
         <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-        
         <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
     
     <span class="k">return</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">loader</span><span class="p">)</span>
 
+<span class="c1"># Evaluation(for validation and testing)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
     <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
@@ -12831,22 +12767,21 @@ weighted avg       0.91      0.91      0.91     28696
     
     <span class="k">return</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">loader</span><span class="p">),</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">all_preds</span><span class="p">,</span> <span class="n">all_labels</span>
 
-<span class="c1"># ============================================================</span>
-<span class="c1"># STEP 8: Train Model</span>
-<span class="c1"># ============================================================</span>
+<span class="c1"># Train Model for 5 epochs</span>
 <span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">best_val_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Starting training..."</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">EPOCHS</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">EPOCHS</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    
     <span class="n">train_loss</span> <span class="o">=</span> <span class="n">train_epoch</span><span class="p">(</span><span class="n">lstm_hybrid_model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+
+    <span class="c1"># Test on data it has never seen</span>
     <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">val_f1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">lstm_hybrid_model</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
-    
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Train Loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Val Loss: </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | Val Acc: </span><span class="si">{</span><span class="n">val_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | Val F1: </span><span class="si">{</span><span class="n">val_f1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     
+    <span class="c1">#If this is the best version of the model so far, save it to disk.</span>
     <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;</span> <span class="n">best_val_loss</span><span class="p">:</span>
         <span class="n">best_val_loss</span> <span class="o">=</span> <span class="n">val_loss</span>
         <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">lstm_hybrid_model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">'best_hybrid_model.pt'</span><span class="p">)</span>
@@ -13252,9 +13187,6 @@ weighted avg       0.54      0.74      0.63     28696
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># FINAL TESTING</span>
 
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"FINAL TESTING ON HELD-OUT TEST SET"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
 
 <span class="c1"># Prepare test data</span>
 <span class="n">X_test_text</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span>
@@ -13262,7 +13194,6 @@ weighted avg       0.54      0.74      0.63     28696
 
 <span class="c1"># Get synopsis for test (same pattern as train/val) </span>
 <span class="n">test_synopsis</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">synopsis_dict</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
-
 <span class="n">results_summary</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1">########################## TEST FOR BAG OF WORDS ##############################</span>
@@ -13298,12 +13229,12 @@ weighted avg       0.54      0.74      0.63     28696
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_synopsis</span><span class="p">))</span>
 <span class="n">results_summary</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'Model'</span><span class="p">:</span> <span class="s1">'TF-IDF (Review + Synopsis)'</span><span class="p">,</span> <span class="s1">'Test Accuracy'</span><span class="p">:</span> <span class="n">synopsis_test_acc</span><span class="p">,</span> <span class="s1">'Test F1'</span><span class="p">:</span> <span class="n">synopsis_test_f1</span><span class="p">})</span>
 
+
 <span class="c1">########################## TEST FOR TF-IDF + COSINE SIMILARITY ##############################</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 3: TF-IDF + COSINE SIMILARITY"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
 
-<span class="c1"># Compute cosine similarity for test</span>
 <span class="n">test_review_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_text</span><span class="p">)</span>
 <span class="n">test_synopsis_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_synopsis</span><span class="p">)</span>
 
@@ -13325,8 +13256,6 @@ weighted avg       0.54      0.74      0.63     28696
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 4: TF-IDF + COSINE + USER + MOVIE FEATURES"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-
-<span class="c1"># Get user features for test</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Extracting test user features..."</span><span class="p">)</span>
 <span class="n">test_user_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">[</span><span class="n">get_user_features</span><span class="p">(</span><span class="n">uid</span><span class="p">)[</span><span class="s1">'user_smoothed_spoiler_rate'</span><span class="p">],</span> 
@@ -13334,8 +13263,6 @@ weighted avg       0.54      0.74      0.63     28696
     <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'user_id'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Test User Features"</span><span class="p">)</span>
 <span class="p">])</span>
 <span class="n">test_user_features_scaled</span> <span class="o">=</span> <span class="n">scaler_user</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_user_features</span><span class="p">)</span>
-
-<span class="c1"># Get movie features for test</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Extracting test movie features..."</span><span class="p">)</span>
 <span class="n">test_movie_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">[</span><span class="n">get_movie_features</span><span class="p">(</span><span class="n">mid</span><span class="p">)[</span><span class="s1">'num_reviews'</span><span class="p">],</span> 
@@ -13343,7 +13270,6 @@ weighted avg       0.54      0.74      0.63     28696
     <span class="k">for</span> <span class="n">mid</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'movie_id'</span><span class="p">],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Test Movie Features"</span><span class="p">)</span>
 <span class="p">])</span>
 <span class="n">test_movie_features_scaled</span> <span class="o">=</span> <span class="n">scaler_movie</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_movie_features</span><span class="p">)</span>
-
 <span class="n">X_test_full</span> <span class="o">=</span> <span class="n">hstack</span><span class="p">([</span>
     <span class="n">X_test_review_tfidf</span><span class="p">,</span>
     <span class="n">X_test_synopsis_tfidf</span><span class="p">,</span>
@@ -13351,9 +13277,7 @@ weighted avg       0.54      0.74      0.63     28696
     <span class="n">csr_matrix</span><span class="p">(</span><span class="n">test_user_features_scaled</span><span class="p">),</span>
     <span class="n">csr_matrix</span><span class="p">(</span><span class="n">test_movie_features_scaled</span><span class="p">)</span>
 <span class="p">])</span>
-
 <span class="n">y_test_pred_full</span> <span class="o">=</span> <span class="n">full_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_full</span><span class="p">)</span>
-
 <span class="n">full_test_acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_full</span><span class="p">)</span>
 <span class="n">full_test_f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_full</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test Accuracy: </span><span class="si">{</span><span class="n">full_test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -13365,11 +13289,9 @@ weighted avg       0.54      0.74      0.63     28696
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 5: HYBRID LSTM MODEL"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-
 <span class="n">X_test_tfidf_lstm</span> <span class="o">=</span> <span class="n">tfidf_lstm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">])</span>
-
 <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">HybridSpoilerDataset</span><span class="p">(</span>
-    <span class="n">texts</span><span class="o">=</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>  <span class="c1"># &lt;-- Changed</span>
+    <span class="n">texts</span><span class="o">=</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'review_text'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
     <span class="n">labels</span><span class="o">=</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'is_spoiler'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
     <span class="n">tfidf_features</span><span class="o">=</span><span class="n">X_test_tfidf_lstm</span><span class="p">,</span>
     <span class="n">cosine_sims</span><span class="o">=</span><span class="n">test_cosine_sim</span><span class="p">,</span>
@@ -13378,13 +13300,10 @@ weighted avg       0.54      0.74      0.63     28696
     <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span>
     <span class="n">max_len</span><span class="o">=</span><span class="n">MAX_LEN</span>
 <span class="p">)</span>
-
 <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
 <span class="n">lstm_hybrid_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 <span class="n">all_preds</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">all_labels</span> <span class="o">=</span> <span class="p">[]</span>
-
 <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"LSTM Testing"</span><span class="p">):</span>
         <span class="n">seq</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'seq'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
@@ -13393,13 +13312,10 @@ weighted avg       0.54      0.74      0.63     28696
         <span class="n">user</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="n">movie</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'movie'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-        
         <span class="n">outputs</span> <span class="o">=</span> <span class="n">lstm_hybrid_model</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">tfidf</span><span class="p">,</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">movie</span><span class="p">)</span>
         <span class="n">preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-        
         <span class="n">all_preds</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
         <span class="n">all_labels</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
-
 <span class="n">lstm_test_acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">all_labels</span><span class="p">,</span> <span class="n">all_preds</span><span class="p">)</span>
 <span class="n">lstm_test_f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">all_labels</span><span class="p">,</span> <span class="n">all_preds</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test Accuracy: </span><span class="si">{</span><span class="n">lstm_test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -13411,31 +13327,23 @@ weighted avg       0.54      0.74      0.63     28696
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 6: S-BERT + COSINE SIMILARITY + LOGISTIC REGRESSION"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-
 <span class="n">y_test_pred_sbert</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_similarity</span><span class="p">)</span> 
-
 <span class="n">sbert_test_acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_sbert</span><span class="p">)</span>
 <span class="n">sbert_test_f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_sbert</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test Accuracy: </span><span class="si">{</span><span class="n">sbert_test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test F1: </span><span class="si">{</span><span class="n">sbert_test_f1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred_sbert</span><span class="p">))</span>
-
 <span class="n">results_summary</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'Model'</span><span class="p">:</span> <span class="s1">'S-Bert + Cosine + LogReg'</span><span class="p">,</span> <span class="s1">'Test Accuracy'</span><span class="p">:</span> <span class="n">sbert_test_acc</span><span class="p">,</span> <span class="s1">'Test F1'</span><span class="p">:</span> <span class="n">sbert_test_f1</span><span class="p">})</span>
-
 
 <span class="c1"># FINAL SUMMARY TABLE</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"FINAL TEST RESULTS SUMMARY"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-
 <span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_summary</span><span class="p">)</span>
 <span class="n">results_df</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'Test Accuracy'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">results_df</span><span class="p">[</span><span class="s1">'Rank'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">results_df</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[[</span><span class="s1">'Rank'</span><span class="p">,</span> <span class="s1">'Model'</span><span class="p">,</span> <span class="s1">'Test Accuracy'</span><span class="p">,</span> <span class="s1">'Test F1'</span><span class="p">]]</span>
-
 <span class="n">display</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
-
 <span class="n">best_model</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🏆 BEST MODEL: </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">'Model'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   Test Accuracy: </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">'Test Accuracy'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -13862,164 +13770,6 @@ FINAL TEST RESULTS SUMMARY
 <li>Attention mechanism focuses on spoiler-indicating phrases</li>
 </ul>
 <hr/>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a85fe9bb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Evaluating-model-on-custom-data">Evaluating model on custom data<a class="anchor-link" href="#Evaluating-model-on-custom-data">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=754e677a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># ============================================================</span>
-<span class="c1"># MANUAL VALIDATION (SANITY CHECK) - HYBRID LSTM MODEL</span>
-<span class="c1"># ============================================================</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"MANUAL VALIDATION - HYBRID LSTM MODEL"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-
-<span class="c1"># Test examples for "Last Vegas" (tt1204975)</span>
-<span class="n">test_movie_id</span> <span class="o">=</span> <span class="s2">"tt1204975"</span>
-
-<span class="c1"># SPOILER: Reveals key plot points and ending</span>
-<span class="n">test_spoiler</span> <span class="o">=</span> <span class="s2">"Billy ends up breaking up with Lisa and marrying Diana instead! The whole movie builds up to his wedding with Lisa but Paddy convinces him she's not the one. In the end, Billy calls his friends to tell them he's marrying Diana, the singer they met at Binion's casino."</span>
-
-<span class="c1"># NON-SPOILER: General review without plot details</span>
-<span class="n">test_non_spoiler</span> <span class="o">=</span> <span class="s2">"A fun comedy with great chemistry between the four legendary actors. Michael Douglas, Robert De Niro, Morgan Freeman and Kevin Kline deliver solid performances. The Vegas setting is entertaining and the humor works well for older audiences."</span>
-
-<span class="c1"># Create a fake user_id for testing</span>
-<span class="n">test_user_id</span> <span class="o">=</span> <span class="s2">"ur_test_user"</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">predict_single_review</span><span class="p">(</span><span class="n">review_text</span><span class="p">,</span> <span class="n">movie_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Predict spoiler for a single review using Hybrid LSTM"""</span>
-    
-    <span class="c1"># 1. Text sequence</span>
-    <span class="n">seq</span> <span class="o">=</span> <span class="n">text_to_seq</span><span class="p">(</span><span class="n">review_text</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">MAX_LEN</span><span class="p">)</span>
-    <span class="n">seq_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">seq</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    
-    <span class="c1"># 2. TF-IDF features</span>
-    <span class="n">tfidf_vec</span> <span class="o">=</span> <span class="n">tfidf_lstm</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">review_text</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
-    <span class="n">tfidf_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tfidf_vec</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    
-    <span class="c1"># 3. Cosine similarity</span>
-    <span class="n">review_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">review_text</span><span class="p">])</span>
-    <span class="n">synopsis_text</span> <span class="o">=</span> <span class="n">synopsis_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">movie_id</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
-    <span class="n">synopsis_shared</span> <span class="o">=</span> <span class="n">tfidf_shared</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">synopsis_text</span><span class="p">])</span>
-    <span class="n">cosine_sim</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">review_shared</span><span class="p">,</span> <span class="n">synopsis_shared</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">cosine_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="n">cosine_sim</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    
-    <span class="c1"># 4. User features (use global average for unknown user)</span>
-    <span class="n">user_feat</span> <span class="o">=</span> <span class="n">get_user_features</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="n">user_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">user_feat</span><span class="p">[</span><span class="s1">'user_smoothed_spoiler_rate'</span><span class="p">],</span> 
-                               <span class="n">user_feat</span><span class="p">[</span><span class="s1">'user_confidence'</span><span class="p">]]])</span>
-    <span class="n">user_features_scaled</span> <span class="o">=</span> <span class="n">scaler_user</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">user_features</span><span class="p">)</span>
-    <span class="n">user_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">user_features_scaled</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    
-    <span class="c1"># 5. Movie features</span>
-    <span class="n">movie_feat</span> <span class="o">=</span> <span class="n">get_movie_features</span><span class="p">(</span><span class="n">movie_id</span><span class="p">)</span>
-    <span class="n">movie_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">movie_feat</span><span class="p">[</span><span class="s1">'num_reviews'</span><span class="p">],</span> 
-                                <span class="n">movie_feat</span><span class="p">[</span><span class="s1">'spoiler_percent'</span><span class="p">]]])</span>
-    <span class="n">movie_features_scaled</span> <span class="o">=</span> <span class="n">scaler_movie</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">movie_features</span><span class="p">)</span>
-    <span class="n">movie_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">movie_features_scaled</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    
-    <span class="c1"># 6. Predict</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">seq_tensor</span><span class="p">,</span> <span class="n">tfidf_tensor</span><span class="p">,</span> <span class="n">cosine_tensor</span><span class="p">,</span> <span class="n">user_tensor</span><span class="p">,</span> <span class="n">movie_tensor</span><span class="p">)</span>
-        <span class="n">prob</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">prediction</span> <span class="o">=</span> <span class="s2">"SPOILER"</span> <span class="k">if</span> <span class="n">prob</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">"NOT SPOILER"</span>
-    
-    <span class="k">return</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">prob</span>
-
-<span class="c1"># --- Test Spoiler Example ---</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 1: LIKELY SPOILER (Last Vegas)"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text: </span><span class="se">\"</span><span class="si">{</span><span class="n">test_spoiler</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...</span><span class="se">\"</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">pred1</span><span class="p">,</span> <span class="n">prob1</span> <span class="o">=</span> <span class="n">predict_single_review</span><span class="p">(</span><span class="n">test_spoiler</span><span class="p">,</span> <span class="n">test_movie_id</span><span class="p">,</span> <span class="n">test_user_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Prediction: </span><span class="si">{</span><span class="n">pred1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Probability: </span><span class="si">{</span><span class="n">prob1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected: SPOILER"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ CORRECT"</span> <span class="k">if</span> <span class="n">pred1</span> <span class="o">==</span> <span class="s2">"SPOILER"</span> <span class="k">else</span> <span class="s2">"✗ INCORRECT"</span><span class="p">)</span>
-
-<span class="c1"># --- Test Non-Spoiler Example ---</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"TEST 2: LIKELY NON-SPOILER (Last Vegas)"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text: </span><span class="se">\"</span><span class="si">{</span><span class="n">test_non_spoiler</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s2">...</span><span class="se">\"</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">pred2</span><span class="p">,</span> <span class="n">prob2</span> <span class="o">=</span> <span class="n">predict_single_review</span><span class="p">(</span><span class="n">test_non_spoiler</span><span class="p">,</span> <span class="n">test_movie_id</span><span class="p">,</span> <span class="n">test_user_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Prediction: </span><span class="si">{</span><span class="n">pred2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Probability: </span><span class="si">{</span><span class="n">prob2</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected: NOT SPOILER"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ CORRECT"</span> <span class="k">if</span> <span class="n">pred2</span> <span class="o">==</span> <span class="s2">"NOT SPOILER"</span> <span class="k">else</span> <span class="s2">"✗ INCORRECT"</span><span class="p">)</span>
-
-<span class="c1"># --- Summary ---</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"MANUAL VALIDATION SUMMARY"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-<span class="n">correct</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">pred1</span> <span class="o">==</span> <span class="s2">"SPOILER"</span><span class="p">,</span> <span class="n">pred2</span> <span class="o">==</span> <span class="s2">"NOT SPOILER"</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Correct predictions: </span><span class="si">{</span><span class="n">correct</span><span class="si">}</span><span class="s2">/2"</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">correct</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"✓ Model passes sanity check!"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"⚠ Model may need further investigation"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>============================================================
-MANUAL VALIDATION - HYBRID LSTM MODEL
-============================================================
-
---------------------------------------------------
-TEST 1: LIKELY SPOILER (Last Vegas)
---------------------------------------------------
-Text: "Billy ends up breaking up with Lisa and marrying Diana instead! The whole movie builds up to his wed..."
-
-Prediction: NOT SPOILER
-Probability: 0.0533
-Expected: SPOILER
-✗ INCORRECT
-
---------------------------------------------------
-TEST 2: LIKELY NON-SPOILER (Last Vegas)
---------------------------------------------------
-Text: "A fun comedy with great chemistry between the four legendary actors. Michael Douglas, Robert De Niro..."
-
-Prediction: NOT SPOILER
-Probability: 0.0007
-Expected: NOT SPOILER
-✓ CORRECT
-
-============================================================
-MANUAL VALIDATION SUMMARY
-============================================================
-Correct predictions: 1/2
-⚠ Model may need further investigation
-</pre>
-</div>
 </div>
 </div>
 </div>
